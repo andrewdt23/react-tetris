@@ -2,19 +2,25 @@ import React from "react";
 import GameBoard from "./components/GameBoard";
 import { GameStore } from "./stores/GameStore";
 import { Menu } from "./components/Menu";
+import { Controls } from "./components/Controls";
 
 const App = () => {
   const [gameStarted, setGameStarted] = React.useState(false);
 
   return (
-    <div>
+    <>
       <h1 className="text-center">Tetris</h1>
       {gameStarted ? (
         <GameBoard gameStore={new GameStore()} />
       ) : (
-        <Menu setGameStarted={setGameStarted} />
+        <>
+          <Menu setGameStarted={setGameStarted} />
+          <div className="mt-5">
+            <Controls />
+          </div>
+        </>
       )}
-    </div>
+    </>
   );
 };
 

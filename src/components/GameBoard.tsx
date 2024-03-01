@@ -9,6 +9,7 @@ import {
   SQUARE_SIZE,
 } from "../helpers/constants";
 import { GameStore } from "../stores/GameStore";
+import { Controls } from "./Controls";
 
 const Square = ({ color }: { color: string }) => (
   <div
@@ -74,15 +75,20 @@ const GameBoard = observer(({ gameStore }: { gameStore: GameStore }) => {
     <>
       <Row>
         <Col xs={4}>
-          <Container
-            style={{
-              width: `${SQUARE_SIZE * 4}px`,
-              height: `${SQUARE_SIZE * 4}px`,
-            }}
-          >
-            {pieceStore}
-          </Container>
-          <h2 className="text-center">Stored Piece</h2>
+          <Row>
+            <Container
+              style={{
+                width: `${SQUARE_SIZE * 4}px`,
+                height: `${SQUARE_SIZE * 4}px`,
+              }}
+            >
+              {pieceStore}
+            </Container>
+            <h2 className="text-center">Stored Piece</h2>
+          </Row>
+          <Row className="mt-5">
+            <Controls />
+          </Row>
         </Col>
         <Col xs={4}>
           <Container
