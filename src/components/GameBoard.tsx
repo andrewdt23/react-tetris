@@ -3,23 +3,25 @@ import { Button, Col, Container, Row } from "reactstrap";
 import { observer } from "mobx-react-lite";
 
 import {
+  DEFAULT_BOARD_VALUE,
   GAME_BOARD_HEIGHT,
   GAME_BOARD_WIDTH,
   SQUARE_SIZE,
 } from "../helpers/constants";
 import { GameStore } from "../stores/GameStore";
 
-const Square = ({ color }: { color: string }) => {
-  return (
-    <div
-      style={{
-        height: `${SQUARE_SIZE}px`,
-        width: `${SQUARE_SIZE}px`,
-        backgroundColor: color,
-      }}
-    />
-  );
-};
+const Square = ({ color }: { color: string }) => (
+  <div
+    style={{
+      height: `${SQUARE_SIZE}px`,
+      width: `${SQUARE_SIZE}px`,
+      backgroundColor: color,
+      ...(color !== DEFAULT_BOARD_VALUE.color && {
+        border: "2px solid grey",
+      }),
+    }}
+  />
+);
 
 const GameBoard = observer(({ gameStore }: { gameStore: GameStore }) => {
   const {
