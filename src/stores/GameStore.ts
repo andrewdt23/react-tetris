@@ -197,12 +197,12 @@ export class GameStore {
         if (this.alreadyStored) {
           break;
         }
+        const newPiece = this.storedPiece;
         const newTetromino = this.tetrominos.shift();
         if (newTetromino) {
           this.storedPiece = newTetromino.type;
         }
-        if (this.storedPiece) {
-          const newPiece = this.storedPiece;
+        if (newPiece) {
           this.addTetromino(new TetrominoStore(TETROMINOS[newPiece]));
         } else {
           this.addTetromino(new TetrominoStore(randomTetromino()));
