@@ -3,23 +3,26 @@ import { Button, Col, Container, Row } from "reactstrap";
 import { observer } from "mobx-react-lite";
 
 import {
+  DEFAULT_BOARD_VALUE,
   GAME_BOARD_HEIGHT,
   GAME_BOARD_WIDTH,
   SQUARE_SIZE,
 } from "../helpers/constants";
 import { GameStore } from "../stores/GameStore";
+import { Controls } from "./Controls";
 
-const Square = ({ color }: { color: string }) => {
-  return (
-    <div
-      style={{
-        height: `${SQUARE_SIZE}px`,
-        width: `${SQUARE_SIZE}px`,
-        backgroundColor: color,
-      }}
-    />
-  );
-};
+const Square = ({ color }: { color: string }) => (
+  <div
+    style={{
+      height: `${SQUARE_SIZE}px`,
+      width: `${SQUARE_SIZE}px`,
+      backgroundColor: color,
+      ...(color !== DEFAULT_BOARD_VALUE.color && {
+        border: "2px solid grey",
+      }),
+    }}
+  />
+);
 
 const GameBoard = observer(({ gameStore }: { gameStore: GameStore }) => {
   const {
@@ -72,15 +75,20 @@ const GameBoard = observer(({ gameStore }: { gameStore: GameStore }) => {
     <>
       <Row>
         <Col xs={4}>
-          <Container
-            style={{
-              width: `${SQUARE_SIZE * 4}px`,
-              height: `${SQUARE_SIZE * 4}px`,
-            }}
-          >
-            {pieceStore}
-          </Container>
-          <h2 className="text-center">Stored Piece</h2>
+          <Row>
+            <Container
+              style={{
+                width: `${SQUARE_SIZE * 4}px`,
+                height: `${SQUARE_SIZE * 4}px`,
+              }}
+            >
+              {pieceStore}
+            </Container>
+            <h2 className="text-center">Stored Piece</h2>
+          </Row>
+          <Row className="mt-5">
+            <Controls />
+          </Row>
         </Col>
         <Col xs={4}>
           <Container
